@@ -37,7 +37,7 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <com.pisey.android_player.components.player.media.DownloadProgressButton
+            <com.example.customexoplayer.components.player.media.DownloadProgressButton
                 android:id="@+id/exo_download_progress"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
