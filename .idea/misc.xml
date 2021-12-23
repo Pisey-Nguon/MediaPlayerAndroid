@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/activity_player_offline.xml" value="0.20833333333333334" />
         <entry key="customexoplayer/src/main/res/drawable/ic_done.xml" value="0.19166666666666668" />
         <entry key="customexoplayer/src/main/res/layout/download_progress.xml" value="0.20833333333333334" />
         <entry key="customexoplayer/src/main/res/layout/exo_player_control_view.xml" value="0.20833333333333334" />
