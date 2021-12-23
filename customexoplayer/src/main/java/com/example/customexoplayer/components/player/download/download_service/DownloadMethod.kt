@@ -18,7 +18,7 @@ class DownloadMethod(private val context: Context) {
     }
 
     fun cancelDownload() {
-        DownloadService.sendRemoveAllDownloads(context, DownloadService::class.java, false)
+        DownloadService.sendRemoveAllDownloads(context, VideoDownloadService::class.java, false)
     }
 
     fun isDownloaded(url: String): Boolean {
