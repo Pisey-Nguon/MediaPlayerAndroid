@@ -1,6 +1,8 @@
 # MediaPlayer
 [![](https://jitpack.io/v/Pisey-Nguon/MediaPlayer.svg)](https://jitpack.io/#Pisey-Nguon/MediaPlayer)
 
+Donate me by click here https://www.buymeacoffee.com/Pisey
+
 How to
 
 To get a Git project into your build:
