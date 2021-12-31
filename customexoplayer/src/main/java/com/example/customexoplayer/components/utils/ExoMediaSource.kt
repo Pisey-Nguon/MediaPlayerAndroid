@@ -15,11 +15,13 @@ import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
 import com.google.gson.Gson
 import com.example.customexoplayer.PlayerResource
+import com.example.customexoplayer.components.player.media.model.PrepareResource
 
 
 class ExoMediaSource(private val context:Context): MediaSourceBuilderControl {
 
     private var playerResource: PlayerResource? = null
+    private val dataSourceFactory = PlayerUtil.getDataSourceFactory(context)
 
     private fun buildVideoMediaSource(uri: Uri, dataSourceFactory: DataSource.Factory): MediaSource {
         return when (@C.ContentType val type = Util.inferContentType(uri, null)) {
@@ -36,26 +38,27 @@ class ExoMediaSource(private val context:Context): MediaSourceBuilderControl {
         return factory.createMediaSource( subtitleFormat, C.TIME_UNSET)
     }
 
+    private fun validateResourceType(prepareResource: PrepareResource,dataSourceFactory: DataSource.Factory):MediaSource{
+        return when(prepareResource.resourceType){
+            ResourceType.MEDIA_URL -> buildVideoMediaSource(prepareResource.uri,dataSourceFactory)
+            ResourceType.SUBTITLE_URL -> buildSubtitleMediaSource(prepareResource.uri,prepareResource.language,dataSourceFactory)
+        }
+    }
+
     override fun setPlayerResource(playerResource: PlayerResource?): MediaSourceBuilderControl {
         this.playerResource = playerResource
         return this
     }
 
     override fun buildOnline(): MergingMediaSource {
-        val size:Int = if (playerResource?.subtitles != null){
-            playerResource?.subtitles?.size!!.plus(1)
-        }else{
-            1
+        val prepareResourceList = ArrayList<PrepareResource>()
+        prepareResourceList.add(PrepareResource(uri = Uri.parse(playerResource?.mediaUrl),resourceType = ResourceType.MEDIA_URL))
+        playerResource?.subtitles?.forEach {
+            prepareResourceList.add(PrepareResource(Uri.parse(it.subtitleUrl),language = it.language,resourceType = ResourceType.SUBTITLE_URL))
         }
-        val dataSourceFactory = PlayerUtil.getDataSourceFactory(context)
-        val videoSource = buildVideoMediaSource(Uri.parse(playerResource?.mediaUrl),dataSourceFactory)
 
-        val mediaSources : Array<MediaSource> = Array(size){
-            if (it == 0){
-                videoSource
-            }else{
-                buildSubtitleMediaSource(Uri.parse(playerResource?.subtitles?.get(it - 1)?.subtitleUrl),playerResource?.subtitles?.get(it - 1)?.language,dataSourceFactory)
-            }
+        val mediaSources : Array<MediaSource> = Array(prepareResourceList.size){
+            validateResourceType(prepareResource = prepareResourceList[it],dataSourceFactory = dataSourceFactory)
         }
 
         return MergingMediaSource(*mediaSources)
@@ -65,22 +68,22 @@ class ExoMediaSource(private val context:Context): MediaSourceBuilderControl {
     override fun buildOffline(): MergingMediaSource? {
         var mergingMediaSource:MergingMediaSource? = null
 
-        val size:Int = if (playerResource?.subtitles != null){
-            playerResource?.subtitles?.size!!.plus(1)
-        }else{
-            1
+        val prepareResourceList = ArrayList<PrepareResource>()
+        prepareResourceList.add(PrepareResource(uri = Uri.parse(playerResource?.mediaUrl),resourceType = ResourceType.MEDIA_URL))
+        playerResource?.subtitles?.forEach {
+            prepareResourceList.add(PrepareResource(Uri.parse(it.subtitleUrl),language = it.language,resourceType = ResourceType.SUBTITLE_URL))
         }
-        val dataSourceFactory = PlayerUtil.getDataSourceFactory(context)
+
         val downloadRequest = PlayerUtil.getDownloadTracker(context).getDownloadRequest(Uri.parse(playerResource?.mediaUrl))
         if (downloadRequest != null){
             playerResource = Gson().fromJson(Util.fromUtf8Bytes(downloadRequest.data), PlayerResource::class.java)
             val videoSource = DownloadHelper.createMediaSource(downloadRequest,dataSourceFactory)
 
-            val mediaSources : Array<MediaSource> = Array(size){
+            val mediaSources : Array<MediaSource> = Array(prepareResourceList.size){
                 if (it == 0){
                     videoSource
                 }else{
-                    buildSubtitleMediaSource(Uri.parse(playerResource?.subtitles?.get(it - 1)?.subtitleUrl),playerResource?.subtitles?.get(it - 1)?.language,dataSourceFactory)
+                    validateResourceType(prepareResource = prepareResourceList[it],dataSourceFactory)
                 }
             }
             mergingMediaSource = MergingMediaSource(*mediaSources)

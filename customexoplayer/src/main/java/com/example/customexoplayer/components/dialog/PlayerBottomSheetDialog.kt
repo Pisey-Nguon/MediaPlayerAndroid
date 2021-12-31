@@ -13,8 +13,8 @@ import com.example.customexoplayer.components.dialog.adapter.PlayerOptionAdapter
 import com.example.customexoplayer.components.dialog.model.PlayerOptionModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.example.customexoplayer.components.player.media.ExoViewType
-import com.example.customexoplayer.components.player.media.StoreInstance
+import com.example.customexoplayer.components.utils.ExoViewType
+import com.example.customexoplayer.components.utils.StoreInstance
 import com.example.customexoplayer.components.utils.SystemUIUtils
 
 class PlayerBottomSheetDialog(private val playerOptionList:ArrayList<PlayerOptionModel>) : BottomSheetDialogFragment() {

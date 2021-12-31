@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_skip_view"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:id="@+id/containerAdFirstShow"
+        android:visibility="visible"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="120dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvCountDownAd"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:text="2"/>
+
+        <ImageView
+            android:id="@+id/ivThumbAd"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/containerAdSecondShow"
+        android:visibility="visible"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSkip"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:background="@null"
+            android:drawableEnd="@drawable/ic_skip"
+            android:textColor="@color/color_white"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Skip Ad"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

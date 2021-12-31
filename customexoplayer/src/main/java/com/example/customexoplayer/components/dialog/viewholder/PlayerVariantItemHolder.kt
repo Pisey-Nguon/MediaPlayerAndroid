@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.customexoplayer.R
 import com.example.customexoplayer.components.dialog.adapter.PlayerOptionAdapterCallback
 import com.example.customexoplayer.components.dialog.model.PlayerOptionModel
-import com.example.customexoplayer.components.player.media.invisible
-import com.example.customexoplayer.components.player.media.show
+import com.example.customexoplayer.components.utils.invisible
+import com.example.customexoplayer.components.utils.show
 
 class PlayerVariantItemHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
     private val containerItemVariant = itemView.findViewById<LinearLayout>(R.id.containerItemVariant)

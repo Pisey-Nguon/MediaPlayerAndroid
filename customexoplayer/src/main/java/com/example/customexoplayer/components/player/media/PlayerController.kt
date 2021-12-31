@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import com.google.android.exoplayer2.ExoPlayer
 import com.example.customexoplayer.PlayerResource
 
-interface PlayerController {
+interface PlayerController:AdController {
 
     fun setPlayerResource(playerResource: PlayerResource): PlayerController
     fun getPlayerResource(): PlayerResource?
