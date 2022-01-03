@@ -3,13 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.24259259259259258" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_player_offline.xml" value="0.20833333333333334" />
+        <entry key="customexoplayer/src/main/res/drawable/bg_button.xml" value="0.20462962962962963" />
+        <entry key="customexoplayer/src/main/res/drawable/bg_skip_view.xml" value="0.20462962962962963" />
         <entry key="customexoplayer/src/main/res/drawable/ic_done.xml" value="0.19166666666666668" />
+        <entry key="customexoplayer/src/main/res/drawable/ic_skip.xml" value="0.20462962962962963" />
         <entry key="customexoplayer/src/main/res/layout/download_progress.xml" value="0.20833333333333334" />
+        <entry key="customexoplayer/src/main/res/layout/exo_ad_player_control.xml" value="0.335" />
         <entry key="customexoplayer/src/main/res/layout/exo_player_control_view.xml" value="0.20833333333333334" />
+        <entry key="customexoplayer/src/main/res/layout/item_player_more.xml" value="0.1" />
         <entry key="customexoplayer/src/main/res/layout/item_player_variant.xml" value="0.20833333333333334" />
-        <entry key="customexoplayer/src/main/res/layout/layout_video_player.xml" value="0.1328125" />
+        <entry key="customexoplayer/src/main/res/layout/layout_video_player.xml" value="0.335" />
+        <entry key="customexoplayer/src/main/res/layout/player_bottom_sheet_dialog.xml" value="0.16302083333333334" />
+        <entry key="customexoplayer/src/main/res/layout/skip_view.xml" value="0.375" />
       </map>
     </option>
   </component>

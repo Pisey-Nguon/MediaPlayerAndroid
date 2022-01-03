@@ -14,6 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/adLoaderView"
+        android:visibility="gone"
+        app:hide_on_touch="false"
+        app:show_timeout="0"
+        app:controller_layout_id="@layout/exo_ad_player_control"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.example.customexoplayer.components.player.custom.skipad.SkipView
+        android:id="@+id/btnSkip"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loadingView"
         android:indeterminate="true"

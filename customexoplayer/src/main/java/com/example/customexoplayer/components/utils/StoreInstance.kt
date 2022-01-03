@@ -1,4 +1,4 @@
-package com.example.customexoplayer.components.player.media
+package com.example.customexoplayer.components.utils
 
 
 object StoreInstance {

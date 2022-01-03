@@ -25,10 +25,12 @@ import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.customexoplayer.AndroidPlayer
 import com.example.customexoplayer.components.dialog.controller.PlayerBottomSheetController
+import com.example.customexoplayer.components.player.custom.CustomTimeBar
+import com.example.customexoplayer.components.player.custom.skipad.SkipView
 import com.example.customexoplayer.components.player.download.download_service.DownloadMethod
 import com.example.customexoplayer.components.player.download.model.DownloadEventModel
-import com.example.customexoplayer.components.utils.ConstantDownload
-import com.example.customexoplayer.components.utils.SystemUIUtils
+import com.example.customexoplayer.components.player.media.model.AdResource
+import com.example.customexoplayer.components.utils.*
 
 @SuppressLint("CustomViewStyleable", "InflateParams")
 class LayoutControl(private val context: Context, private val androidPlayer: AndroidPlayer, attributeSet: AttributeSet?)  {
@@ -37,11 +39,13 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
     private val layoutVideoPlayer: View = layoutInflater.inflate(R.layout.layout_video_player,null)
     private val playerControlView: PlayerControlView = layoutVideoPlayer.findViewById(R.id.exo_controller)
     private val playerView: PlayerView = layoutVideoPlayer.findViewById(R.id.playerView)
+    private val adLoaderView:PlayerView = layoutVideoPlayer.findViewById(R.id.adLoaderView)
     private val loadingView: CircularProgressIndicator =  layoutVideoPlayer.findViewById(R.id.loadingView)
     private val btnPlayView:ImageButton = layoutVideoPlayer.findViewById(R.id.exo_play)
     private val btnPauseView:ImageButton = layoutVideoPlayer.findViewById(R.id.exo_pause)
     private val btnViewType:ImageButton = layoutVideoPlayer.findViewById(R.id.exo_view_type)
     private val btnMore:ImageButton = layoutVideoPlayer.findViewById(R.id.exo_more)
+    private val btnSkip:SkipView = layoutVideoPlayer.findViewById(R.id.btnSkip)
     private val btnDownloadProgressButton: DownloadProgressButton = layoutVideoPlayer.findViewById(R.id.exo_download_progress)
     private val containerButtonProgress: FrameLayout = layoutVideoPlayer.findViewById(R.id.containerButtonProgress)
 
@@ -196,8 +200,13 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
         }
     }
 
-    fun setPlayerView(player: ExoPlayer?) {
+    fun setPlayerForPlayerView(player: ExoPlayer?) {
         playerView.player = player
+    }
+
+    fun setPlayerForAdsLoaderView(player: ExoPlayer?){
+        adLoaderView.player = player
+        adLoaderView.findViewById<CustomTimeBar>(R.id.exo_progress).setDisabledScrub(true)
     }
 
     fun getLayoutVideoPlayer(): View {
@@ -260,6 +269,34 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
             animator.duration = 500
             animator.start()
         }
+    }
+
+    fun hideAd(){
+        playerView.show()
+        adLoaderView.gone()
+        btnSkip.gone()
+    }
+    fun showAd(){
+        playerView.gone()
+        adLoaderView.show()
+        btnSkip.show()
+    }
+
+    fun initSkipView(adResource: AdResource){
+        btnSkip.setAdResource(adResource).addButtonSkipListener {
+                hideAd()
+                androidPlayer.pauseAd()
+                androidPlayer.play()
+            }
+            .build()
+    }
+
+    fun pauseCountDownSkip(){
+        btnSkip.pauseCountDown()
+    }
+
+    fun resumeCountDownSkip(){
+        btnSkip.resumeCountDown()
     }
 
     fun onReadyToPlay() {

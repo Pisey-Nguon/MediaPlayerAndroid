@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.customexoplayer.components.player.custom.CustomTimeBar
+        android:id="@id/exo_progress"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:scrubber_drawable="@drawable/bg_skip_view"
+        app:touch_target_height="4dp"
+        app:scrubber_enabled_size="0dp"
+        app:scrubber_disabled_size="0dp"
+        app:scrubber_dragged_size="0dp"
+        app:bar_height="4dp"
+        app:buffered_color="@color/color_buffered_ad"
+        app:played_color="@color/color_yellow"
+        app:scrubber_color="@null"
+        app:unplayed_color="@color/color_unplayed_ad" />
+
+</RelativeLayout>

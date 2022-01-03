@@ -30,7 +30,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical|end"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="5dp">
 
         <FrameLayout
             android:id="@+id/containerButtonProgress"
@@ -60,7 +60,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingHorizontal="5dp">
 
         <TextView
             android:id="@id/exo_position"

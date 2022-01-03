@@ -4,7 +4,13 @@
     <color name="color_transparent">#00000000</color>
     <color name="color_video_transparent">#88000000</color>
     <color name="color_black">#171717</color>
+    <color name="color_red">#E42929</color>
+    <color name="color_yellow">#FFEB3B</color>
 
     <color name="color_unplayed">#8E8E8E</color>
     <color name="color_buffered">#C5C5C5</color>
+
+    <color name="color_unplayed_ad">#00000000</color>
+    <color name="color_buffered_ad">#00000000</color>
+
 </resources>
