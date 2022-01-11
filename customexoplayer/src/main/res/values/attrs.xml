@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AndroidPlayer">
-        <attr name="resizingEnabled" format="boolean"/>
         <attr name="iconPlay" format="reference"/>
         <attr name="iconPause" format="reference"/>
         <attr name="iconReplay" format="reference"/>
         <attr name="colorBackgroundProgressIndicator" format="color"/>
-        <attr name="showButtonScreenType" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="CustomTimeBar">

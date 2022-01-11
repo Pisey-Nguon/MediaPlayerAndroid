@@ -179,6 +179,26 @@ class AndroidPlayer: FrameLayout, PlayerController, ActionPlayerControl, Default
         return this
     }
 
+    override fun setDownloadEnabled(downloadEnabled: Boolean): PlayerController {
+        layoutControl.setDownloadEnabled(downloadEnabled = downloadEnabled)
+        return this
+    }
+
+    override fun setFullScreenEnabled(fullScreenEnabled: Boolean): PlayerController {
+        layoutControl.setFullScreenEnabled(fullScreenEnabled = fullScreenEnabled)
+        return this
+    }
+
+    override fun setMoreOptionEnabled(moreOptionEnabled: Boolean): PlayerController {
+        layoutControl.setMoreOptionEnabled(moreOptionEnabled = moreOptionEnabled)
+        return this
+    }
+
+    override fun setTimeBarEnabled(timeBarEnabled: Boolean): PlayerController {
+        layoutControl.setTimeBarEnabled(timeBarEnabled = timeBarEnabled)
+        return this
+    }
+
     override fun setIconPlay(iconPlay: Drawable): PlayerController {
         layoutControl.setIconPlay(iconPlay = iconPlay)
         return this
@@ -196,11 +216,6 @@ class AndroidPlayer: FrameLayout, PlayerController, ActionPlayerControl, Default
 
     override fun setColorBackgroundProgressIndicator(colorBackgroundProgressIndicator: Int): PlayerController {
         layoutControl.setColorBackgroundProgressIndicator(colorBackgroundProgressIndicator = colorBackgroundProgressIndicator)
-        return this
-    }
-
-    override fun setShowButtonScreenType(showButtonScreenType: Boolean): PlayerController {
-        layoutControl.setShowButtonScreenType(showButtonScreenType = showButtonScreenType)
         return this
     }
 

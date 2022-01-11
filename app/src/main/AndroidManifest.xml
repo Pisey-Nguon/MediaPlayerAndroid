@@ -11,7 +11,6 @@
         android:theme="@style/Theme.MediaPlayer">
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|layoutDirection"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayerOfflineActivity"
+            android:name=".BasicPlayerOnlineActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|layoutDirection"
+            android:exported="false" />
+        <activity
+            android:name=".ProPlayerOnlineActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|layoutDirection"
+            android:exported="false"/>
+        <activity
+            android:name=".ProPlayerOfflineActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:exported="false" />
     </application>

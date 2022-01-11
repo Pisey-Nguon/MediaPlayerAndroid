@@ -14,16 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.customexoplayer.R
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.offline.Download
-import com.google.android.exoplayer2.ui.PlayerControlView
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.video.VideoSize
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.customexoplayer.AndroidPlayer
+import com.example.customexoplayer.R
 import com.example.customexoplayer.components.dialog.controller.PlayerBottomSheetController
 import com.example.customexoplayer.components.player.custom.CustomTimeBar
 import com.example.customexoplayer.components.player.custom.skipad.SkipView
@@ -31,6 +26,12 @@ import com.example.customexoplayer.components.player.download.download_service.D
 import com.example.customexoplayer.components.player.download.model.DownloadEventModel
 import com.example.customexoplayer.components.player.media.model.AdResource
 import com.example.customexoplayer.components.utils.*
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.offline.Download
+import com.google.android.exoplayer2.ui.PlayerControlView
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.video.VideoSize
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 @SuppressLint("CustomViewStyleable", "InflateParams")
 class LayoutControl(private val context: Context, private val androidPlayer: AndroidPlayer, attributeSet: AttributeSet?)  {
@@ -48,15 +49,18 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
     private val btnSkip:SkipView = layoutVideoPlayer.findViewById(R.id.btnSkip)
     private val btnDownloadProgressButton: DownloadProgressButton = layoutVideoPlayer.findViewById(R.id.exo_download_progress)
     private val containerButtonProgress: FrameLayout = layoutVideoPlayer.findViewById(R.id.containerButtonProgress)
+    private val containerTimeBar : LinearLayout = layoutVideoPlayer.findViewById(R.id.containerTimeBar)
 
     private val a = context.obtainStyledAttributes(attributeSet, R.styleable.AndroidPlayer, 0, 0)
     //resource styled attributes
-    private var resizingEnabled:Boolean = a.getBoolean(R.styleable.AndroidPlayer_resizingEnabled,false)
+    private var resizingEnabled:Boolean = false
+    private var moreOptionEnabled:Boolean = false
+    private var downloadEnabled:Boolean = false
+    private var fullScreenEnabled:Boolean = false
     private var iconPlay:Drawable = ContextCompat.getDrawable(context,a.getResourceId(R.styleable.AndroidPlayer_iconPlay,R.drawable.ic_play))!!
     private var iconPause:Drawable = ContextCompat.getDrawable(context,a.getResourceId(R.styleable.AndroidPlayer_iconPause,R.drawable.ic_pause))!!
     private var iconReplay:Drawable = ContextCompat.getDrawable(context,a.getResourceId(R.styleable.AndroidPlayer_iconReplay,R.drawable.ic_replay))!!
     private var colorBackgroundProgressIndicator:Int = ContextCompat.getColor(context,a.getResourceId(R.styleable.AndroidPlayer_colorBackgroundProgressIndicator,R.color.color_video_transparent))
-    private var showButtonScreenType:Boolean = a.getBoolean(R.styleable.AndroidPlayer_showButtonScreenType,false)
 
     //Download method
     private val downloadMethod = DownloadMethod(context)
@@ -217,6 +221,23 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
         this.resizingEnabled = resizingEnabled
     }
 
+    fun setDownloadEnabled(downloadEnabled:Boolean){
+        this.downloadEnabled = downloadEnabled
+    }
+
+    fun setFullScreenEnabled(fullScreenEnabled:Boolean){
+        this.fullScreenEnabled = fullScreenEnabled
+        if (fullScreenEnabled) btnViewType.show() else btnViewType.gone()
+    }
+
+    fun setMoreOptionEnabled(moreOptionEnabled:Boolean){
+        this.moreOptionEnabled = moreOptionEnabled
+    }
+
+    fun setTimeBarEnabled(timeBarEnabled:Boolean){
+        if (timeBarEnabled) containerTimeBar.show() else containerTimeBar.gone()
+    }
+
     fun setIconPlay(iconPlay: Drawable) {
         this.iconPlay = iconPlay
     }
@@ -233,12 +254,8 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
         this.colorBackgroundProgressIndicator = colorBackgroundProgressIndicator
     }
 
-    fun setShowButtonScreenType(showButtonScreenType:Boolean){
-        this.showButtonScreenType = showButtonScreenType
-    }
-
     fun onSizeChanged(width: Int, height: Int) {
-        if (showButtonScreenType){
+        if (fullScreenEnabled){
             btnViewType.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_full_screen))
             when(StoreInstance.exoViewType){
                 ExoViewType.FULL_SCREEN -> btnViewType.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_full_screen_exit))
@@ -300,11 +317,9 @@ class LayoutControl(private val context: Context, private val androidPlayer: And
     }
 
     fun onReadyToPlay() {
-        if(btnPlayView.drawable != iconPlay){
-            btnPlayView.setImageDrawable(iconPlay)
-        }
-        btnMore.show()
-        containerButtonProgress.show()
+        if (btnPlayView.drawable != iconPlay) btnPlayView.setImageDrawable(iconPlay)
+        if (moreOptionEnabled) btnMore.show()
+        if (downloadEnabled) containerButtonProgress.show()
     }
 
     fun onEndPlay() {

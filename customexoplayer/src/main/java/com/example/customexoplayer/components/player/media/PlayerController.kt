@@ -11,11 +11,14 @@ interface PlayerController:AdController {
     fun getPlayerResource(): PlayerResource?
     fun setLifecycle(lifecycle:Lifecycle): PlayerController
     fun setResizingEnabled(resizingEnabled:Boolean): PlayerController
+    fun setDownloadEnabled(downloadEnabled:Boolean):PlayerController
+    fun setFullScreenEnabled(fullScreenEnabled:Boolean): PlayerController
+    fun setMoreOptionEnabled(moreOptionEnabled:Boolean): PlayerController
+    fun setTimeBarEnabled(timeBarEnabled:Boolean): PlayerController
     fun setIconPlay(iconPlay: Drawable): PlayerController
     fun setIconPause(iconPause: Drawable): PlayerController
     fun setIconReplay(iconReplay: Drawable): PlayerController
     fun setColorBackgroundProgressIndicator(colorBackgroundProgressIndicator:Int): PlayerController
-    fun setShowButtonScreenType(showButtonScreenType:Boolean): PlayerController
     fun addDownloadListener(downloadState: DownloadState): PlayerController
     fun buildOnline()
     fun buildOffline()

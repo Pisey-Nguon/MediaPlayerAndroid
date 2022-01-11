@@ -34,9 +34,10 @@
 
         <FrameLayout
             android:id="@+id/containerButtonProgress"
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
             <com.example.customexoplayer.components.player.media.DownloadProgressButton
                 android:id="@+id/exo_download_progress"
                 android:layout_width="50dp"
@@ -46,15 +47,16 @@
 
         <ImageButton
             android:id="@+id/exo_more"
-            android:visibility="gone"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:src="@drawable/ic_more" />
+            android:src="@drawable/ic_more"
+            android:visibility="gone" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/containerTimeBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -96,7 +98,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
